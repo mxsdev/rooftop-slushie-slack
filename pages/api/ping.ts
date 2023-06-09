@@ -5,6 +5,6 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     res.status(200).json({
-        message: 'pong'
+        message: req.body
     })
 }

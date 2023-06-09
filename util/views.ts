@@ -18,7 +18,7 @@ const characterList = [
 export const BLOCK_ID_SELECT_CHARACTER = "select_character" as const
 export const ACTION_ID_CHARACTER = "character" as const
 
-export const CharacterModal: View = {
+export const CharacterModal = (private_metadata?: string): View => ({
 	"type": "modal",
 	"title": {
 		"type": "plain_text",
@@ -35,6 +35,7 @@ export const CharacterModal: View = {
 		"text": "Cancel",
 		"emoji": true
 	},
+	private_metadata,
 	"blocks": [
 		{
 			"type": "section",
@@ -62,4 +63,4 @@ export const CharacterModal: View = {
 			"block_id": BLOCK_ID_SELECT_CHARACTER
 		}
 	]
-}
+})
