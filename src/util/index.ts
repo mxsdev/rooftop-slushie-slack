@@ -74,7 +74,7 @@ export async function doOauthFlow (token: string) {
         code: token,
     })
 
-    console.log(res)
+    return res
 }
 
 type ChatGPTMessage = {
