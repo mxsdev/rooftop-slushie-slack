@@ -1,5 +1,29 @@
+// const nodefetch = require('node-fetch')
+// import unfetch from 'unfetch'
+import unfetch from 'isomorphic-unfetch'
+
 async function main() {
-    const res = await fetch("http://localhost:3000/api/interactivity", {
+    await testStatus()
+}
+
+async function testStatus() {
+    // const url = "https://rooftop-slushie-slack-dev.wl.r.appspot.com"
+    const url = "http://localhost:3000"
+    
+    const res = await unfetch(`${url}/api/status`, {
+        method: "get",
+    })
+    
+    const json = await res.json()
+
+    console.log(json)
+}
+
+async function testInteractivity() {
+    // const url = "http://localhost:3000"
+    const url = "https://rooftop-slushie-slack-dev.wl.r.appspot.com"
+    
+    const res = await unfetch(`${url}/api/interactivity`, {
         headers: {
             "Content-Type": "application/json"
         },
@@ -8,13 +32,13 @@ async function main() {
             payload: JSON.stringify({
                 type: "view_submission",
                 view: {
-                    "private_metadata": "hello world",
+                    "private_metadata": "Hey, can we get this PR merged by next monday? Thanks!",
                     state: {
                         values: {
                             select_character: {
                                 character: {
                                     selected_option: {
-                                        value: "Gilfoyle"
+                                        value: "Jian Yang"
                                     }
                                 }
                             }

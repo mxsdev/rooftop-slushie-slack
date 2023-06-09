@@ -16,5 +16,5 @@ npx ts-node ./test/testApi.ts
 ```
 
 ```sh
-npx ts-node ./test/testApi.ts
+node ./dist/test/testApi.js
 ```

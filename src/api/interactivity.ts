@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { MessageShortcut, GlobalShortcut, BlockAction, ViewSubmitAction, ViewClosedAction, View } from '@slack/bolt'
-import { openModal, promptChatGPT, sendMessage } from '../../util'
-import { ACTION_ID_CHARACTER, BLOCK_ID_SELECT_CHARACTER, CharacterModal } from '../../util/views'
+import { openModal, promptChatGPT, sendMessage } from '../../src/util'
+import { ACTION_ID_CHARACTER, BLOCK_ID_SELECT_CHARACTER, CharacterModal } from '../../src/util/views'
  
 type InteractivityMessage = MessageShortcut | GlobalShortcut | BlockAction | ViewSubmitAction | ViewClosedAction
 
@@ -49,14 +49,15 @@ export default async function handler(
         },
         {
           role: 'user',
-          content:`Write a convincing response from ${character} from 'Silicon Valley'`
+          content:`Write a convincing response from ${character} from HBO's show 'Silicon Valley'`
         },
       ])
 
       const responseText = response.choices.map(({ message: { content } }) => content).join("")
 
       res.status(200).json({
-        responseText
+        responseText,
+        choices: response.choices
       })
 
       return

@@ -1,0 +1,4 @@
+cron:
+- description: "daily status"
+  url: /api/status
+  schedule: every day 16:00
