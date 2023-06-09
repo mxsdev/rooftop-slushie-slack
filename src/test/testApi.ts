@@ -7,8 +7,8 @@ async function main() {
 }
 
 async function testStatus() {
-    // const url = "https://rooftop-slushie-slack-dev.wl.r.appspot.com"
-    const url = "http://localhost:3000"
+    const url = "https://rooftop-slushie-slack-dev.wl.r.appspot.com"
+    // const url = "http://localhost:3000"
     
     const res = await unfetch(`${url}/api/status`, {
         method: "get",

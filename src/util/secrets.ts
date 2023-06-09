@@ -20,8 +20,10 @@ export async function getSecrets(): Promise<AppSecrets> {
     if (secrets) return secrets
 
     const res = Object.fromEntries(await Promise.all(appSecrets.map(async (sid) => {
+        const version = sid === 'slack-bot-token' || sid === 'slack-user-token' ? '2' : '1'
+        
         const [accessResponse] = await client.accessSecretVersion({
-            name: `projects/rooftop-slushie-slack-dev/secrets/${sid}/versions/1`
+            name: `projects/rooftop-slushie-slack-dev/secrets/${sid}/versions/${version}`
         });
 
         const responsePayload = accessResponse.payload.data.toString()
