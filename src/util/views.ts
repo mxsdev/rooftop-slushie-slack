@@ -18,6 +18,11 @@ const characterList = [
 export const BLOCK_ID_SELECT_CHARACTER = "select_character" as const
 export const ACTION_ID_CHARACTER = "character" as const
 
+export const BLOCK_ID_DEST = "destination" as const
+export const ACTION_ID_DEST = "destination" as const
+export const VALUE_DEST_THREAD = "thread" as const
+export const VALUE_DEST_CHANNEL_PING = "channel_ping" as const
+
 export const CharacterModal = (private_metadata?: string): View => ({
 	"type": "modal",
 	"title": {
@@ -61,6 +66,34 @@ export const CharacterModal = (private_metadata?: string): View => ({
 				"action_id": ACTION_ID_CHARACTER
 			},
 			"block_id": BLOCK_ID_SELECT_CHARACTER
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Options*"
+			},
+			"accessory": {
+				"type": "checkboxes",
+				"options": [
+					{
+						"text": {
+							"type": "mrkdwn",
+							"text": "Reply in Thread"
+						},
+						"value": VALUE_DEST_THREAD
+					},
+					{
+						"text": {
+							"type": "mrkdwn",
+							"text": "Reply in Channel"
+						},
+						"value": VALUE_DEST_CHANNEL_PING
+					}
+				],
+				"action_id": ACTION_ID_DEST
+			},
+			"block_id": BLOCK_ID_DEST
 		}
 	]
 })
