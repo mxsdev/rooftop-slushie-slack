@@ -92,8 +92,9 @@ export async function promptChatGPT(prompt: ChatGPTMessage[]) {
         },
         method: 'post',
         body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: "gpt-4",
             // temperature: 2.0,
+            max_tokens: 128,
             messages: prompt
         })
     })

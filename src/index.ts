@@ -67,23 +67,25 @@ app.post('/api/interactivity', async (req, res) => {
 
       const destOpts = payload.view.state.values[BLOCK_ID_DEST][ACTION_ID_DEST]
 
-      const sendToThread = (destOpts.selected_options!.find(x => x.value === VALUE_DEST_THREAD)?.text as unknown as { verbatim: boolean }).verbatim ?? false
-      const sendToChannelPing = (destOpts.selected_options!.find(x => x.value === VALUE_DEST_CHANNEL_PING)?.text as unknown as { verbatim: boolean }).verbatim ?? false
+      console.log(JSON.stringify(destOpts, null, 2))
+
+      const sendToThread = !!destOpts.selected_options!.find(x => x.value === VALUE_DEST_THREAD)
+      const sendToChannelPing = !!destOpts.selected_options!.find(x => x.value === VALUE_DEST_CHANNEL_PING)
 
       const { channel, message_id, message_text, user_id } = JSON.parse(payload.view.private_metadata) as PrivateMetadata
 
       promptChatGPT([
+        // {
+        //   role: 'user',
+        //   content: 'I received the following message:'
+        // },
         {
           role: 'user',
-          content: 'I received the following message:'
+          content: `"message_text"`
         },
         {
           role: 'user',
-          content: message_text
-        },
-        {
-          role: 'user',
-          content:`Write a convincing response by the character ${character} from HBO's show 'Silicon Valley'. Write in casual message style.`
+          content:`Write a convincing response to the previous message by the character ${character} from HBO's show 'Silicon Valley'. Write in short and casual style, like in a text message.`
         },
       ]).then((response) => {
         const responseText = response.choices.map(({ message: { content } }) => content).join("")
